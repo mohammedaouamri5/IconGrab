@@ -37,7 +37,7 @@ ifeq ($(config),debug)
 TARGETDIR = ../builde/Debug-linux-x86_64/main
 TARGET = $(TARGETDIR)/main
 OBJDIR = ../bin-int/Debug-linux-x86_64/main
-DEFINES += -DCSV -DWL_DEBUG
+DEFINES += -DWL_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
@@ -46,7 +46,7 @@ else ifeq ($(config),release)
 TARGETDIR = ../builde/Release-linux-x86_64/main
 TARGET = $(TARGETDIR)/main
 OBJDIR = ../bin-int/Release-linux-x86_64/main
-DEFINES += -DCSV -DWL_RELEASE
+DEFINES += -DWL_RELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -g
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
@@ -55,7 +55,7 @@ else ifeq ($(config),dist)
 TARGETDIR = ../builde/Dist-linux-x86_64/main
 TARGET = $(TARGETDIR)/main
 OBJDIR = ../bin-int/Dist-linux-x86_64/main
-DEFINES += -DCSV -DWL_DIST
+DEFINES += -DWL_DIST
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
@@ -74,8 +74,10 @@ OBJECTS :=
 
 GENERATED += $(OBJDIR)/io-file.o
 GENERATED += $(OBJDIR)/main.o
+GENERATED += $(OBJDIR)/search.o
 OBJECTS += $(OBJDIR)/io-file.o
 OBJECTS += $(OBJDIR)/main.o
+OBJECTS += $(OBJDIR)/search.o
 
 # Rules
 # #############################################
@@ -143,6 +145,9 @@ $(OBJDIR)/io-file.o: src/io-file.c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: src/main.c
+	@echo "$(notdir $<)"
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/search.o: src/search.c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
