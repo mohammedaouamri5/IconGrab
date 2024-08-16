@@ -20,3 +20,9 @@ bin-release/
 
 
 !vendor/bin*
+
+
+
+LOG/*
+bin-int/*
+builde/*
